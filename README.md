@@ -25,7 +25,7 @@ Requirements
 
 You can run the required version of the database server in a container, instead of having to install it, like this:
 
-    docker run --name mysql-5.7 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql -d mysql:5.7
+    docker run --name mysql-5.7 -p 3309:3306 -e MYSQL_ROOT_PASSWORD=mysql -d mysql:5.7
 
 and stop and destroy it like this:
 
