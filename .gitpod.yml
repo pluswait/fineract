@@ -22,7 +22,7 @@
 
 image: gitpod/workspace-mysql
 ports:
-- port: 3306
+- port: 3309
   onOpen: ignore
 - port: 8005
   onOpen: ignore
