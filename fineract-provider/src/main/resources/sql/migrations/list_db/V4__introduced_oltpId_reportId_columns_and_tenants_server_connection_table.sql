@@ -22,7 +22,7 @@ RENAME TABLE tenants to temp_tenants;
 create table tenant_server_connections(`id` BIGINT NOT NULL AUTO_INCREMENT,
     `schema_server` VARCHAR(100) NOT NULL DEFAULT 'localhost',
     `schema_name` VARCHAR(100) NOT NULL,
-    `schema_server_port` VARCHAR(10) NOT NULL DEFAULT '3306',
+    `schema_server_port` VARCHAR(10) NOT NULL DEFAULT '3309',
     `schema_username` VARCHAR(100) NOT NULL DEFAULT 'root',
     `schema_password` VARCHAR(100) NOT NULL DEFAULT 'mysql',
     `auto_update` tinyint NOT NULL DEFAULT '1',
