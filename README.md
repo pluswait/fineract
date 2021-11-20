@@ -15,7 +15,8 @@ Fineract是一个成熟的平台，具有开放的api，为金融机构提供可
 Community
 =========
 
-If you are interested in contributing to this project, but perhaps don't quite know how and where to get started, please [join our developer mailing list](http://fineract.apache.org/#contribute), listen into our conversations, chime into threads, and just send us a "Hello!" introduction email; we're a friendly bunch, and look forward to hearing from you.
+如果你有兴趣为这个项目做出贡献，但可能不太清楚如何开始，请[加入我们的开发者邮件列表](http://fineract.apache.org/#contribute)，倾听我们的对话，加入我们的线程，并给我们发一封“你好!”的介绍邮件;
+我们是友好的一群人，期待着你的消息
 
 
 需求
@@ -42,7 +43,7 @@ If you are interested in contributing to this project, but perhaps don't quite k
 (在FINERACT-730之前，还支持Tomcat 7/8，但现在需要Tomcat 9。)
 
 
-明如何为本地开发运行
+说明如何为本地开发运行
 ============
 
 Run the following commands:
@@ -125,21 +126,24 @@ Now to run a new Fineract instance you can simply:
 1. for windows, use `git clone https://github.com/apache/fineract.git --config core.autocrlf=input ; cd fineract`
 1. `docker-compose build`
 1. `docker-compose up -d`
-1. fineract (back-end) is running at https://localhost:8443/fineract-provider/
-1. wait for https://localhost:8443/fineract-provider/actuator/health to return `{"status":"UP"}`
-1. you must go to https://localhost:8443 and remember to accept the self-signed SSL certificate of the API once in your browser, otherwise  you get a message that is rather misleading from the UI.
-1. community-app (UI) is running at http://localhost:9090/?baseApiUrl=https://localhost:8443/fineract-provider&tenantIdentifier=default
-1. login using default _username_ `mifos` and _password_ `password`
+1. Fineract(后端)运行于https://localhost:8443/fineract-provider/
+1.等待https://localhost:8443/fineract-provider/actuator/health返回' {"status":"UP"} ' 
+1.您必须访问https://localhost:8443，并记住一旦在浏览器中接受API的自签名SSL证书，否则您将从UI得到一个相当具有误导性的消息。
+1.community-app (UI)运行于http://localhost:9090/?baseApiUrl=https://localhost:8443/fineract-provider&tenantIdentifier=default
+1.使用默认的_username_ ' mifos '和_password_ ' password '登录
 
-The [`docker-compose.yml`](docker-compose.yml) will build the `fineract` container from the source based on the [`Dockerfile`](Dockerfile).  You could change that to use the pre-built container image instead of having to re-build it.
+[' docker-compose.yml '](docker-compose.yml)将基于[' Dockerfile '](Dockerfile)从源代码构建' fineract '容器。
+您可以将其更改为使用预构建的容器映像，而不必重新构建它
 
-https://hub.docker.com/r/apache/fineract has a pre-built container image of this project, built continuously.
+https://hub.docker.com/r/apache/fineract有这个项目的预构建容器映像，它是连续构建的
 
-You must specify the MySQL tenants database JDBC URL by passing it to the `fineract` container via environment
-variables; please consult the [`docker-compose.yml`](docker-compose.yml) for exact details how to specify those.
-_(Note that in previous versions, the `mysqlserver` environment variable used at `docker build` time instead of at
-`docker run` time did something similar; this has changed in [FINERACT-773](https://issues.apache.org/jira/browse/FINERACT-773)),
-and the `mysqlserver` environment variable is now no longer supported.)_
+您必须指定MySQL承租者数据库JDBC URL，通过环境将其传递给' fineract '容器
+变量;
+请参考[' docker-compose.yml '](docker-compose.yml)获取如何指定这些组件的具体细节。
+_(注意，在以前的版本中，mysqlserver环境变量使用在' docker build '时，而不是在
+' docker run ' time做了类似的事情;
+这在[FINERACT-773](https://issues.apache.org/jira/browse/FINERACT-773)中有所改变，
+现在不支持mysqlserver环境变量。)_
 
 
 Instructions to run on Kubernetes
