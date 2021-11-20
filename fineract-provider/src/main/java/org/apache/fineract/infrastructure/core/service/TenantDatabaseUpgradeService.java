@@ -97,7 +97,7 @@ public class TenantDatabaseUpgradeService {
      */
     private void upgradeTenantDB() {
         String dbHostname = getEnvVar("FINERACT_DEFAULT_TENANTDB_HOSTNAME", "localhost");
-        String dbPort = getEnvVar("FINERACT_DEFAULT_TENANTDB_PORT", "3306");
+        String dbPort = getEnvVar("FINERACT_DEFAULT_TENANTDB_PORT", "3309");
         String dbUid = getEnvVar("FINERACT_DEFAULT_TENANTDB_UID", "root");
         String dbPwd = getEnvVar("FINERACT_DEFAULT_TENANTDB_PWD", "mysql");
         String dbConnParams = getEnvVar("FINERACT_DEFAULT_TENANTDB_CONN_PARAMS", "");
