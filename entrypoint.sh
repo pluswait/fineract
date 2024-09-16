@@ -21,7 +21,7 @@
 
 set -e
 
-while ! nc -zvw3 fineractmysql 3306 ; do
+while ! nc -zvw3 fineractmysql 3309 ; do
     >&2 echo "DB Server is unavailable - sleeping"
     sleep 5
 done

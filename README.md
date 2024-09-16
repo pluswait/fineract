@@ -3,40 +3,47 @@ Apache Fineract: A Platform for Microfinance
 [![Swagger Validation](https://validator.swagger.io/validator?url=https://demo.fineract.dev/fineract-provider/swagger-ui/fineract.yaml)](https://validator.swagger.io/validator/debug?url=https://demo.fineract.dev/fineract-provider/swagger-ui/fineract.yaml) [![build](https://github.com/apache/fineract/actions/workflows/build.yml/badge.svg)](https://github.com/apache/fineract/actions/workflows/build.yml) [![Docker Hub](https://img.shields.io/docker/pulls/apache/fineract.svg?logo=Docker)](https://hub.docker.com/r/apache/fineract)  [![Docker Build](https://img.shields.io/docker/cloud/build/apache/fineract.svg?logo=Docker)](https://hub.docker.com/r/apache/fineract/builds) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=apache_fineract&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=apache_fineract)
 
 
-Fineract is a mature platform with open APIs that provides a reliable, robust, and affordable core banking solution for financial institutions offering services to the world’s 3 billion underbanked and unbanked.
+Fineract是一个成熟的平台，具有开放的api，为金融机构提供可靠、健壮和负担得起的核心银行解决方案，为全球30亿未开行和未开行的金融机构提供服务
 
 [Have a look at the FAQ on our Wiki at apache.org](https://cwiki.apache.org/confluence/display/FINERACT/FAQ) if this README does not answer what you are looking for.  [Visit our JIRA Dashboard](https://issues.apache.org/jira/secure/Dashboard.jspa?selectPageId=12335824) to find issues to work on, see what others are working on, or open new issues.
 
 [![Code Now! (Gitpod)](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/apache/fineract)
-to start contributing to this project in the online web-based IDE GitPod.io right away!
-(You may initially have to press F1 to Find Command and run "Java: Start Language Server".)
-It's of course also possible to contribute with a "traditional" local development environment (see below).
+开始在基于web的IDE GitPod中为这个项目做贡献。
+(最初你可能需要按F1来查找命令并运行“Java: Start Language Server”。)
+当然，也可以使用“传统的”本地开发环境(见下文)。
 
 Community
 =========
 
-If you are interested in contributing to this project, but perhaps don't quite know how and where to get started, please [join our developer mailing list](http://fineract.apache.org/#contribute), listen into our conversations, chime into threads, and just send us a "Hello!" introduction email; we're a friendly bunch, and look forward to hearing from you.
+如果你有兴趣为这个项目做出贡献，但可能不太清楚如何开始，请[加入我们的开发者邮件列表](http://fineract.apache.org/#contribute)，倾听我们的对话，加入我们的线程，并给我们发一封“你好!”的介绍邮件;
+我们是友好的一群人，期待着你的消息
 
 
-Requirements
+需求
 ============
 * Java >= 11 (OpenJDK JVM is tested by our CI on Travis)
 * MySQL 5.7
 
-You can run the required version of the database server in a container, instead of having to install it, like this:
+你可以在容器中运行所需版本的数据库服务器，而不必安装它，像这样:
 
-    docker run --name mysql-5.7 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysql -d mysql:5.7
+    docker run --name mysql-5.7 -p 3309:3306 -e MYSQL_ROOT_PASSWORD=mysql -d mysql:5.7
 
-and stop and destroy it like this:
+然后停下来，像这样毁掉它
 
     docker rm -f mysql-5.7
 
-Beware that this database container database keeps its state inside the container and not on the host filesystem.  It is lost when you destroy (rm) this container.  This is typically fine for development.  See [Caveats: Where to Store Data on the database container documentation](https://hub.docker.com/_/mysql) re. how to make it persistent instead of ephemeral.
+注意，这个数据库容器数据库将其状态保存在容器中，而不是主机文件系统中。
+当你摧毁(rm)这个容器时，它就丢失了。
+这对于开发来说通常很好。
+请参阅[注意:在数据库容器中存储数据的位置](https://hub.docker.com/_/mysql)关于如何使其持久而不是短暂。
 
-Tomcat v9 is only required if you wish to deploy the Fineract WAR to a separate external servlet container.  Note that you do not require to install Tomcat to develop Fineract, or to run it in production if you use the self-contained JAR, which transparently embeds a servlet container using Spring Boot.  (Until FINERACT-730, Tomcat 7/8 were also supported, but now Tomcat 9 is required.)
+
+只有当您希望将Fineract WAR部署到单独的外部servlet容器时，才需要Tomcat v9
+注意，开发Fineract不需要安装Tomcat，如果使用自包含的JAR，也不需要在生产环境中运行它，JAR使用Spring Boot透明地嵌入servlet容器。
+(在FINERACT-730之前，还支持Tomcat 7/8，但现在需要Tomcat 9。)
 
 
-Instructions how to run for local development
+说明如何为本地开发运行
 ============
 
 Run the following commands:
@@ -45,33 +52,33 @@ Run the following commands:
 1. `./gradlew bootRun`
 
 
-Instructions to build the JAR file
+构建JAR文件的说明
 ============
-1. Clone the repository or download and extract the archive file to your local directory.
+1. 克隆存储库或下载并将归档文件解压缩到本地目录
 2. Run `./gradlew clean bootJar` to build a modern cloud native fully self contained JAR file which will be created at `build/libs` directory.
 3. Start it using `java -jar build/libs/fineract-provider.jar` (does not require external Tomcat)
 
-The tenants database connection details are configured [via environment variables (as with Docker container)](#instructions-to-run-using-docker-and-docker-compose), e.g. like this:
+租户数据库连接细节配置[通过环境变量(与Docker容器一样)](#instructions-to-run-using-docker-and-docker-compose)，例如:
 
     export fineract_tenants_pwd=verysecret
     ...
     java -jar fineract-provider.jar
 
 
-Instructions to build a WAR file
+构建WAR文件的说明
 ============
 1. Clone the repository or download and extract the archive file to your local directory.
 2. Run `./gradlew clean war` to build a traditional WAR file which will be created at `build/libs` directory.
 3. Deploy this WAR to your Tomcat v9 Servlet Container.
 
-We recommend using the JAR instead of the WAR file deployment, because it's much easier.
+我们建议使用JAR而不是WAR文件部署，因为它更简单
 
-Note that with the 1.4 release the tenants database pool configuration changed from Tomcat DBCP in XML to an embedded Hikari, configured by environment variables, see above.
+注意，在1.4版本中，租户数据库池配置从XML格式的Tomcat DBCP更改为嵌入式的Hikari，由环境变量进行配置，参见上面
 
 
-Instructions to execute Integration Tests
+执行集成测试的说明
 ============
-> Note that if this is the first time to access MySQL DB, then you may need to reset your password.
+> 注意，如果这是第一次访问MySQL数据库，那么您可能需要重置密码
 
 Run the following commands, very similarly to how [.travis.yml](.travis.yml) does:
 1. `./gradlew createDB -PdbName=fineract_tenants`
@@ -79,33 +86,33 @@ Run the following commands, very similarly to how [.travis.yml](.travis.yml) doe
 1. `./gradlew clean test`
 
 
-Instructions to run and debug in Eclipse IDE
+在Eclipse IDE中运行和调试的说明
 ============
 
-It is possible to run Fineract in Eclipse IDE and also to debug Fineract using Eclipse's debugging facilities.
-To do this, you need to create the Eclipse project files and import the project into an Eclipse workspace:
+可以在Eclipse IDE中运行Fineract，也可以使用Eclipse的调试工具调试Fineract
+为此，您需要创建Eclipse项目文件，并将项目导入Eclipse工作区:
 
 1. Create Eclipse project files into the Fineract project by running `./gradlew cleanEclipse eclipse`
-2. Import the fineract-provider project into your Eclipse workspace (File->Import->General->Existing Projects into Workspace, choose root directory fineract/fineract-provider)
+2. 将fineract-provider项目导入Eclipse工作区(File-&gt;Import-&gt;General-&gt;Existing Projects into workspace，选择根目录fineract/fineract-provider)
 3. Do a clean build of the project in Eclipse (Project->Clean...)
 3. Run / debug Fineract by right clicking on org.apache.fineract.ServerApplication class and choosing Run As / Debug As -> Java Application. All normal Eclipse debugging features (breakpoints, watchpoints etc) should work as expected.
 
-If you change the project settings (dependencies etc) in Gradle, you should redo step 1 and refresh the project in Eclipse.
+如果你在Gradle中更改了项目设置(依赖项等)，你应该重做步骤1，并在Eclipse中刷新项目
 
-You can also use Eclipse Junit support to run tests in Eclipse (Run As->Junit Test)
+还可以使用Eclipse Junit支持在Eclipse中运行测试(以-&gt方式运行;Junit测试)
 
-Finally, modifying source code in Eclipse automatically triggers hot code replace to a running instance, allowing you to immediately test your changes
+最后，在Eclipse中修改源代码会自动触发热代码替换到一个正在运行的实例，允许您立即测试更改
 
 
 Instructions to run using Docker and docker-compose
 ===================================================
 
-It is possible to do a 'one-touch' installation of Fineract using containers (AKA "Docker").
-Fineract now packs the mifos community-app web UI in it's docker deploy.
-You can now run and test fineract with a GUI directly from the combined docker builds.
-This includes the database running in a container.
+可以使用容器 (AKA "Docker"). 完成Fineract的 “一键式” 安装。
+Fineract现在将mifos社区应用web UI打包在docker部署中。
+现在，您可以直接从组合docker构建中使用GUI运行和测试。
+这包括在容器中运行的数据库。
 
-As Prerequisites, you must have `docker` and `docker-compose` installed on your machine; see
+作为先决条件，你必须在你的机器上安装' docker '和' docker-compose ';
 [Docker Install](https://docs.docker.com/install/) and
 [Docker Compose Install](https://docs.docker.com/compose/install/).
 
@@ -119,21 +126,24 @@ Now to run a new Fineract instance you can simply:
 1. for windows, use `git clone https://github.com/apache/fineract.git --config core.autocrlf=input ; cd fineract`
 1. `docker-compose build`
 1. `docker-compose up -d`
-1. fineract (back-end) is running at https://localhost:8443/fineract-provider/
-1. wait for https://localhost:8443/fineract-provider/actuator/health to return `{"status":"UP"}`
-1. you must go to https://localhost:8443 and remember to accept the self-signed SSL certificate of the API once in your browser, otherwise  you get a message that is rather misleading from the UI.
-1. community-app (UI) is running at http://localhost:9090/?baseApiUrl=https://localhost:8443/fineract-provider&tenantIdentifier=default
-1. login using default _username_ `mifos` and _password_ `password`
+1. Fineract(后端)运行于https://localhost:8443/fineract-provider/
+1.等待https://localhost:8443/fineract-provider/actuator/health返回' {"status":"UP"} ' 
+1.您必须访问https://localhost:8443，并记住一旦在浏览器中接受API的自签名SSL证书，否则您将从UI得到一个相当具有误导性的消息。
+1.community-app (UI)运行于http://localhost:9090/?baseApiUrl=https://localhost:8443/fineract-provider&tenantIdentifier=default
+1.使用默认的_username_ ' mifos '和_password_ ' password '登录
 
-The [`docker-compose.yml`](docker-compose.yml) will build the `fineract` container from the source based on the [`Dockerfile`](Dockerfile).  You could change that to use the pre-built container image instead of having to re-build it.
+[' docker-compose.yml '](docker-compose.yml)将基于[' Dockerfile '](Dockerfile)从源代码构建' fineract '容器。
+您可以将其更改为使用预构建的容器映像，而不必重新构建它
 
-https://hub.docker.com/r/apache/fineract has a pre-built container image of this project, built continuously.
+https://hub.docker.com/r/apache/fineract有这个项目的预构建容器映像，它是连续构建的
 
-You must specify the MySQL tenants database JDBC URL by passing it to the `fineract` container via environment
-variables; please consult the [`docker-compose.yml`](docker-compose.yml) for exact details how to specify those.
-_(Note that in previous versions, the `mysqlserver` environment variable used at `docker build` time instead of at
-`docker run` time did something similar; this has changed in [FINERACT-773](https://issues.apache.org/jira/browse/FINERACT-773)),
-and the `mysqlserver` environment variable is now no longer supported.)_
+您必须指定MySQL承租者数据库JDBC URL，通过环境将其传递给' fineract '容器
+变量;
+请参考[' docker-compose.yml '](docker-compose.yml)获取如何指定这些组件的具体细节。
+_(注意，在以前的版本中，mysqlserver环境变量使用在' docker build '时，而不是在
+' docker run ' time做了类似的事情;
+这在[FINERACT-773](https://issues.apache.org/jira/browse/FINERACT-773)中有所改变，
+现在不支持mysqlserver环境变量。)_
 
 
 Instructions to run on Kubernetes
